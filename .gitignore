@@ -1,0 +1,19 @@
+## Exported conversations — not for source control
+exports/**
+!exports/.gitkeep
+
+## Persistent browser profile (stores your login session)
+browser_profile/
+
+## macOS
+.DS_Store
+
+## Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+
+## Claude Code session notes
+CLAUDE.md
