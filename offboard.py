@@ -49,20 +49,17 @@ def get_workspace_id(page):
 
 def fetch_json(page, token, path):
     """Run a fetch() inside the browser so Cloudflare sees a real browser."""
-    headers = json.dumps({"Authorization": f"Bearer {token}"})
-    return page.evaluate(f"""
-        async () => {{
-            const resp = await fetch("https://chatgpt.com{path}", {{
-                headers: {headers}
-            }});
-            if (!resp.ok) {{
+    return page.evaluate("""
+        async ([url, headers]) => {
+            const resp = await fetch(url, { headers });
+            if (!resp.ok) {
                 const body = await resp.text();
                 throw new Error("HTTP " + resp.status + " " + resp.statusText
                                 + ": " + body.slice(0, 200));
-            }}
+            }
             return resp.json();
-        }}
-    """)
+        }
+    """, [f"https://chatgpt.com{path}", {"Authorization": f"Bearer {token}"}])
 
 # ── Sidebar scroll ────────────────────────────────────────────────────────────
 
