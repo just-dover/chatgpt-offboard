@@ -78,6 +78,14 @@ The script is set up for Chrome, but Playwright supports other browsers. If you 
 
 See the [Playwright docs](https://playwright.dev/python/docs/browsers) for details.
 
+## Known limitations
+
+ChatGPT's internal API has a hard cap of approximately 1000 conversations per pagination bucket (regular and archived are counted separately). If you have more than ~1000 conversations, the script will print a warning and the oldest ones beyond that limit will not be exported — there is no known workaround through the API.
+
+**Individual plan users (Free, Plus, Pro)** can work around this by requesting a full data export ZIP from ChatGPT Settings > Data controls > Export, which bypasses the cap entirely.
+
+**Business and Enterprise users** do not have access to the ZIP export feature. This tool is the only known automated option for those plans, and the ~1000 conversation cap currently has no workaround.
+
 ## Notes
 
 - Your `browser_profile/` and `exports/` directories are gitignored and stay local
